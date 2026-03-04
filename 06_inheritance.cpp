@@ -1,5 +1,5 @@
 // exercise 6: inheritance and access specifiers
-// learn: base and derived classes, protected members, constructor chaining and method overriding
+// learn: base and derived classes, protected members, constructor chaining, method overriding, multilevel inheritance
 
 #include <iostream>
 #include <string>
@@ -89,7 +89,7 @@ public:
     }
 };
 
-// derived class 3: Truck (demonstrates multilevel inheritance could be added later)
+// derived class 3: Truck
 class Truck : public Vehicle {
 private:
     double cargoCapacity;  // in tons
@@ -114,6 +114,37 @@ public:
         std::cout << "cargo capacity: " << cargoCapacity << " tons" << std::endl;
         std::cout << "axles: " << numAxles << std::endl;
     }
+
+    // getter for cargo capacity (needed by derived class)
+    double getCargoCapacity() const { return cargoCapacity; }
+};
+
+// multilevel inheritance: PickupTruck derives from Truck, which derives from Vehicle
+class PickupTruck : public Truck {
+private:
+    bool hasFourWheelDrive;
+    double bedLength;
+
+public:
+    // constructor (calls Truck constructor, which calls Vehicle constructor)
+    PickupTruck(std::string b, int y, double p, double capacity, int axles, bool fourWD, double bedLen)
+        : Truck(b, y, p, capacity, axles), hasFourWheelDrive(fourWD), bedLength(bedLen) {
+        std::cout << "pickuptruck constructor called" << std::endl;
+    }
+
+    // override displayType method again
+    void displayType() const override {
+        std::cout << "type: pickup truck" << std::endl;
+    }
+
+    // method specific to PickupTruck
+    void displayPickupInfo() const {
+        displayBasicInfo();
+        displayType();
+        std::cout << "cargo capacity: " << getCargoCapacity() << " tons" << std::endl;
+        std::cout << "bed length: " << bedLength << " ft" << std::endl;
+        std::cout << "4WD: " << (hasFourWheelDrive ? "yes" : "no") << std::endl;
+    }
 };
 
 int main() {
@@ -135,17 +166,33 @@ int main() {
     std::cout << "\n=== truck information ===" << std::endl;
     truck1.displayTruckInfo();
 
+    std::cout << "\n=== creating a pickup truck (multilevel inheritance) ===" << std::endl;
+    PickupTruck pickup1("chevrolet", 2024, 38000.0, 2.5, 2, true, 6.5);
+    
+    std::cout << "\n=== pickup truck information ===" << std::endl;
+    pickup1.displayPickupInfo();
+
     std::cout << "\n=== demonstrating polymorphism ===" << std::endl;
-    Vehicle* vehicles[3];
+    Vehicle* vehicles[4];
     vehicles[0] = &car1;
     vehicles[1] = &bike1;
     vehicles[2] = &truck1;
+    vehicles[3] = &pickup1;  // can be treated as Vehicle (grandparent)
 
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < 4; i++) {
         std::cout << "\nvehicle " << i + 1 << ":" << std::endl;
         vehicles[i]->displayType();  // calls overridden method
         std::cout << "brand: " << vehicles[i]->getBrand() << std::endl;
     }
+
+    std::cout << "\n=== multilevel inheritance chain ===" << std::endl;
+    std::cout << "pickup1 can be treated as:" << std::endl;
+    std::cout << "- PickupTruck (itself)" << std::endl;
+    std::cout << "- Truck (parent)" << std::endl;
+    std::cout << "- Vehicle (grandparent)" << std::endl;
+    Truck* truckPtr = &pickup1;
+    std::cout << "\naccessing via Truck pointer:" << std::endl;
+    truckPtr->displayType();
 
     return 0;
 }
