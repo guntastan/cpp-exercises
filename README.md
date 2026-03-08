@@ -16,6 +16,7 @@ daily c++ practice exercises covering fundamental concepts and modern features. 
 | 08 | templates | function/class templates, specialization |
 | 09 | exception handling | try-catch blocks, custom exceptions, stack unwinding |
 | 10 | smart pointers | unique_ptr, shared_ptr, weak_ptr, raii |
+| 11 | stl containers, vector, map, set, algorithms, iterators, lambda functions |
 
 ## compile
 
