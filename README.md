@@ -17,7 +17,7 @@ daily c++ practice exercises covering fundamental concepts and modern features. 
 | 09 | exception handling | try-catch blocks, custom exceptions, stack unwinding |
 | 10 | smart pointers | unique_ptr, shared_ptr, weak_ptr, raii |
 | 11 | stl containers | vector, map, set, algorithms, iterators, lambda functions |
-| 12 | move semantics |
+| 12 | move semantics | move constructor, move assignment, std::move, rvalue references |
 
 ## compile
 
