@@ -18,6 +18,8 @@ daily c++ practice exercises covering fundamental concepts and modern features. 
 | 10 | smart pointers | unique_ptr, shared_ptr, weak_ptr, raii |
 | 11 | stl containers | vector, map, set, algorithms, iterators, lambda functions |
 | 12 | move semantics | move constructor, move assignment, std::move, rvalue references |
+| 13 | concurrency | std::thread, mutex, lock_guard, condition_variable, async, future |
+| 14 | file i/o and filesystem | ifstream, ofstream, fstream, stringstream, filesystem, text and binary files |
 
 ## compile
 
