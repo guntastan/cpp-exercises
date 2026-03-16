@@ -20,6 +20,7 @@ daily c++ practice exercises covering fundamental concepts and modern features. 
 | 12 | move semantics | move constructor, move assignment, std::move, rvalue references |
 | 13 | concurrency | std::thread, mutex, lock_guard, condition_variable, async, future |
 | 14 | file i/o and filesystem | ifstream, ofstream, fstream, stringstream, filesystem, text and binary files |
+| 15 | regular expressions | |
 
 ## compile
 
